@@ -36,9 +36,19 @@ grad = zeros(size(theta));
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
 
+% setting hypothesis h = g(theta^T.x) == g(X.theta) because x as columns are lines of X
+h = sigmoid(X*theta);
+
+% setting ther cost (J)
+theta_reg = theta;
+theta_reg(1) = 0;
+
+% theta_reg is a column-vector, so to get a scalar value, we do theta_reg'*theta_reg, which will sum the squares of all thetas
+% wuld also work with sum(theta_reg.^2)
+J = (1/m) * (-y' * log(h) - (1-y)' *  log(1-h)) + lambda/(2*m) * theta_reg'*theta_reg; % sum(theta_reg.^2)
 
 
-
+grad = (1/m) * X'*(h-y) + lambda/m * theta_reg;
 
 
 

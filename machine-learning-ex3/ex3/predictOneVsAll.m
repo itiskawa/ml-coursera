@@ -29,6 +29,10 @@ X = [ones(m, 1) X];
 %       are in rows, then, you can use max(A, [], 2) to obtain the max 
 %       for each row.
 %       
+prediction = all_theta*X';
+[pr, indexmax] = max(prediction, [], 1); % need to take max for each column, as the prediction matrix is 10 x 5000, 
+% i.e. each column is a prediction -> take max prediction
+p = indexmax;
 
 
 
