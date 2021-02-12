@@ -63,17 +63,67 @@ Theta2_grad = zeros(size(Theta2));
 %
 
 
-% computing the cost function
-h = 
+% computing the cost function J
+sizeX = size(X)
+X = [ones(m,1), X]; 
+
+% need to relabel y
+y =  y == 1:max(y);
+%ysize = size(y)
+
+a1 = X;
+a2 = sigmoid(Theta1 * X')';
+s2 = size(a2, 1)
+a2 = [ones(s2, 1) a2];
+a3 = sigmoid(Theta2 * a2')';
+
+%output_size = size(a3)
+
+matrix = (1/m) * sum(sum((-y .* log(a3) - (1-y).*(log(1-a3)))));
+J = matrix
+
+Theta1_reg = Theta1;
+Theta1_reg(:, 1) = 0;
+Theta2_reg = Theta2;
+Theta2_reg(:, 1) = 0;
+reg = lambda/(2*m) *(sum(sum(Theta2_reg .* Theta2_reg)) + sum(sum(Theta1_reg .* Theta1_reg)));
+
+J += reg;
 
 
+% ========= SECOND PART ===========
 
+delta_l = 0;
+delta3 = a3 - y;
 
+delta1 = zeros(size(Theta1_grad));
+delta2 = zeros(size(Theta2_grad));
 
+% consider vectorizing this
+for i = 1:m
+    % forward pass of i-th example
+    a1 = X(i,:)';
+    z2 = Theta1 * a1;
+    a2 = sigmoid(z2);
+    a2 = [1; a2];
+    z3 = Theta2 * a2;
+    a3 = sigmoid(z3);
 
+    % delta
 
+    d3 = a3 - y(i, :)'; 
+    d3size = size(d3);
+    d2 = Theta2'*d3 .* sigmoidGradient([1; z2]);
+    d2size = size(d2);
 
+    % summing
+    delta2 += (d3*a2');
+    delta1 +=  (d2(2:end)*a1');
 
+Theta1_grad = (1/m) * delta1 + (lambda/m * [zeros(size(Theta1_grad, 1), 1) Theta1(:, 2:end)]);
+Theta2_grad = (1/m) * delta2 + (lambda/m * [zeros(size(Theta2_grad, 1), 1) Theta2(:, 2:end)]);
+
+    
 
 
 
