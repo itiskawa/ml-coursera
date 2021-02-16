@@ -16,8 +16,11 @@ sim = 0;
 %
 %
 
+top = -sum((x2 - x1).^2);
+bot = 2*sigma^2;
 
-
+expo = top / bot;
+sim = exp(expo);
 
 
 
