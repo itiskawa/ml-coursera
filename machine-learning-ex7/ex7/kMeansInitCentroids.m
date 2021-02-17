@@ -14,7 +14,8 @@ centroids = zeros(K, size(X, 2));
 %
 
 
-
+randidx = randperm(size(X, 1)); % randomly permutes the indices of the data examples
+centroids = X(randidx(1:K),:); % sets the centroids to K of those random data points
 
 
 
