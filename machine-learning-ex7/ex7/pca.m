@@ -20,6 +20,8 @@ S = zeros(n);
 %       number of examples).
 %
 
+sigma = (1/m) * X' * X; % covariance matrix
+[U, S, V] = svd(sigma); % SVD decomposition
 
 
 
