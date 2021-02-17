@@ -22,12 +22,13 @@ idx = zeros(size(X,1), 1);
 %
 
 for i = 1: size(X,1),
+    dist = [];
     for j = 1:K,
-
-
-
-
+        % need to take the LINE, so don't forget the (j, :) part
+        dist =  [dist norm(X(i, :) - centroids(j, :), 2)];
     end
+    [val, ind] = min(dist);
+    idx(i) = ind;
 end
 
 
