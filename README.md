@@ -1,4 +1,2 @@
-# Course Taken for preparation to CS-233b at EPFL
-## Machine Learning by Andrew Ng (Stanford)
-As I need to up my gpa, i've taken it upon myself to complete this course in 3 weeks. 
-Seems doable
+# Machine Learning by Andrew Ng (Stanford)
+Next semester i'll be taking CS-233b (Introduction to Machine Learning), & i want to have a head start, as well as a 100% in that subject, so i'm preparing.
